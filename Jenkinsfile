@@ -10,5 +10,10 @@ pipeline{
         '''
       }
     }
+    stage('Upload to AWS'){
+      withAWS(credentials:'aws-static',region:'us-west-2') {
+        s3Upload(file:'index.html', bucket:'aws-static-jenkins-pipeline-bucket', path:'')
+      }
+    }
   }
 }
